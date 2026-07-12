@@ -3,6 +3,7 @@ import { Blacklist } from "../models/blacklist.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { AsyncHandler } from "../utils/AsyncHandler.js"
+import { sendEmailService } from "../service/email.service.js";
 
 
 const  generateAccessTokenAndRefreshToken = async (userId) => {
@@ -49,6 +50,8 @@ const userRegister = AsyncHandler(async (req, res) => {
     if(!createUser) {
         throw new ApiError(400, "User is not create in database")
     }
+
+    await sendEmailService(createUser.email, createUser.name)
 
     return res
     .status(200)
