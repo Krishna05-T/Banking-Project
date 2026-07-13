@@ -8,10 +8,12 @@ const accountSchema = new mongoose.Schema({
         index: true         //  study b+ tree
     },
     status: {
+        type: String,
         enum: {
             values: ["ACTIVE", "FROZEN", "CLOSED"],
-            message: "Status can be either ACTIVE, FROZEN and CLOSED"
-        }
+            message: "Status can be either ACTIVE, FROZEN and CLOSED",
+        },
+        default: "ACTIVE"
     },
     currency: {
         type: String,
@@ -24,4 +26,4 @@ const accountSchema = new mongoose.Schema({
 
 accountSchema.index({ user: 1, status: 1})
 
-export const account = mongoose.model("accounts", accountSchema)
+export const Account = mongoose.model("accounts", accountSchema)
