@@ -11,7 +11,7 @@ const ledgerSchema = new mongoose.Schema({
     ammount: {
         type: Number,
         required: [true, "Ammout is required creating a transaction"],
-        immutable: TextTrackCue
+        immutable: true
     },
     transaction: {
         type: String,
